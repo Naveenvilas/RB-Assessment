@@ -8,6 +8,11 @@ public class WorldApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WorldApplication.class, args);
+
+		public String hello()   
+  		{  
+			return "Hello World";  
+		}  
 	}
 
 }
