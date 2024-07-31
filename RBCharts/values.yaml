@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: artifactory/world
@@ -17,14 +17,14 @@ fullnameOverride: "svc-world-prod"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "worldprod-sa"
 
 podAnnotations: {}
 podLabels: {}
@@ -45,48 +45,53 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+  className: "nginx-ingress-prod"
   hosts:
-    - host: chart-example.local
+    - host: world-prod-int.net
       paths:
-        - path: /
-          pathType: ImplementationSpecific
+      - path: /
+
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+   limits:
+     cpu: 1
+     memory: 2Gi
+   requests:
+     cpu: "250m"
+     memory: 500Mi
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /ping
+    port: 8080
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  
 readinessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /ping
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
 
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 100
+  minReplicas: 2
+  maxReplicas: 4
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
 volumes: []

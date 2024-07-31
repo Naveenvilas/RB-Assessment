@@ -1,2 +1,2 @@
 #!/bin/bash
-helm upgrade --install RBCharts ./RBCharts --namespace default --set image.repository=your-dockerhub-username/your-app-name --set image.tag=latest
+helm upgrade --install RBCharts -f ./RBCharts/values.yaml --namespace default  --set image.tag=latest  --kubeconfig ${kube_config}
