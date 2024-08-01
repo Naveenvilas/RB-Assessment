@@ -55,11 +55,11 @@ jobs:
         run: |
           docker build -t my-spring-boot-app:latest .
   
-      - name: Tag Docker image
-        run: |
-          docker tag my-spring-boot-app:latest ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-app:${{ github.sha }}
+      #- name: Tag Docker image
+      #  run: |
+      #    docker tag my-spring-boot-app:latest ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-app:${{ github.sha }}
 
   
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-app:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-app:latest
