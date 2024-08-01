@@ -1,14 +1,14 @@
 # RB-Assessment
-# Java Application Deployment to AWS EKS using GitHub Actions and Terraform
-
-## Prerequisites
-- Java 11
+# Prerequisites
+- Java 17
 - Docker
 - Terraform
 - GitHub
 
-## Setup and Execution
+# Steps
 1. Clone the repository.
+
+2. Configure AWS credentials in github.
 
 2. Build and push the Docker image:
     ./mvnw clean package
@@ -19,5 +19,5 @@
     cd terraform
     terraform init
     terraform apply
-5. Configure GitHub Actions .
+5. Above steps are configured in GitHub Actions .
 6. Push changes to the main branch to trigger the CI/CD pipeline.

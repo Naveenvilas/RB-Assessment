@@ -1,2 +1,2 @@
 #!/bin/bash
-helm upgrade --install RBCharts -f ./RBCharts/values.yaml --namespace default  --set image.tag=latest  --kubeconfig ${kube_config}
+helm upgrade --install RBCharts ./RBCharts --namespace default --set image.repository=${ARTICRED}/world --set image.tag=latest
