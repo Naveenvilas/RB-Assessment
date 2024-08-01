@@ -42,7 +42,7 @@ jobs:
    
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-webapp:latest .
+          docker build -t my-spring-boot-webapp:latest .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -53,4 +53,4 @@ jobs:
   
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-spring-boot-webapp:latest
+          docker push my-spring-boot-webapp:latest
