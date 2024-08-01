@@ -1,10 +1,15 @@
-output "shared_logging_bucket" {
-  description = "The name of the shared logging bucket"
-  value       = aws_s3_bucket.logging.bucket
+output "vpc_id" {
+  value = module.vpc.vpc_id
 }
 
-output "common_policy_arn" {
-  description = "The ARN of the common IAM policy"
-  value       = aws_iam_policy.common_policy.arn
+output "eks_cluster_name" {
+  value = module.eks.cluster_name
 }
 
+output "eks_cluster_endpoint" {
+  value = module.eks.cluster_endpoint
+}
+
+output "eks_cluster_security_group_id" {
+  value = module.eks.cluster_security_group_id
+}
