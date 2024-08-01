@@ -53,4 +53,5 @@ jobs:
   
       - name: Push Docker image
         run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p  ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push my-spring-boot-webapp:latest
