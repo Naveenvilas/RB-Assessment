@@ -17,6 +17,17 @@ jobs:
           distribution: 'temurin'  # Specify the JDK distribution
           java-version: '17'
 
+      - name: Git leask checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+        
+      - name: Git leks scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+
       - name: Run SonarQube scan
         run: |
           mvn sonar:sonar -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
