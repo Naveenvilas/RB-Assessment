@@ -20,14 +20,14 @@ jobs:
     - name: Helm Template
       run: helm template ./RBCharts --values ./RBCharts/values.yaml
 
-    - name: Install kubeval
+    - name: Install kubeconform
       run: |
-        wget https://github.com/instrumenta/kubeval/releases/download/0.16.1/kubeval-linux-amd64.tar.gz
-        tar -xzvf kubeval-linux-amd64.tar.gz
-        sudo mv kubeval /usr/local/bin/kubeval
+        wget https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz
+        tar -xzvf kubeconform-linux-amd64.tar.gz
+        sudo mv kubeconform /usr/local/bin/kubeconform
 
-    - name: Kubeval Validation
-      run: helm template ./RBCharts --values ./RBCharts/values.yaml | kubeval
+    - name: Kubeconform Validation
+      run: helm template ./RBCharts --values ./RBCharts/values.yaml | kubeconform
 
     - name: Install helm-unittest
       run: helm plugin install https://github.com/quintush/helm-unittest
