@@ -1,0 +1,36 @@
+name: Validate Helm Chart
+
+on:
+    workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+
+    - name: Helm Lint
+      run: helm lint ./RBCharts
+
+    - name: Helm Template
+      run: helm template ./RBCharts --values ./RBCharts\values.yaml
+
+    - name: Install kubeval
+      run: |
+        wget https://github.com/instrumenta/kubeval/releases/download/0.16.1/kubeval-linux-amd64.tar.gz
+        tar -xzvf kubeval-linux-amd64.tar.gz
+        sudo mv kubeval /usr/local/bin/kubeval
+
+    - name: Kubeval Validation
+      run: helm template ./RBCharts --values ./RBCharts\values.yaml | kubeval
+
+    - name: Install helm-unittest
+      run: helm plugin install https://github.com/quintush/helm-unittest
+
+    - name: Helm Unit Test
+      run: helm unittest ./RBCharts
