@@ -16,6 +16,8 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=6
+          --shm-size=1g
+          
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
