@@ -42,3 +42,11 @@ Steps:
 7. Above steps are in the githubactions at .github/workflows/main.yml
    
 Addtionally added stages for - gitleaks, sonarqube and helm lint.
+
+![image](https://github.com/user-attachments/assets/6f44c816-483e-4d6d-914e-0bcc124cb721)
+
+![image](https://github.com/user-attachments/assets/97343b9e-4bf5-410b-b667-0448a3f31d7f)
+
+
+
+
