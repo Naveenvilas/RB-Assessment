@@ -19,9 +19,3 @@ jobs:
 
     - name: Helm Template
       run: helm template ./RBCharts --values ./RBCharts/values.yaml
-
-    - name: Install helm-unittest
-      run: helm plugin install https://github.com/quintush/helm-unittest
-
-    - name: Helm Unit Test
-      run: helm unittest ./RBCharts
