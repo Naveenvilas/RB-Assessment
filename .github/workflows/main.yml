@@ -77,12 +77,12 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p  ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push naveenvilas/my-spring-boot-webapp:latest
 
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+  #    - name: Set up AWS CLI
+  #      uses: aws-actions/configure-aws-credentials@v2
+  #      with:
+  #        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #        aws-region: ${{ secrets.AWS_REGION }}
 
 #      - name: Set up kubectl
 #        uses: azure/setup-kubectl@v1
@@ -108,3 +108,14 @@ jobs:
 
       - name: Helm Template
         run: helm template ./RBCharts --values ./RBCharts/values.yaml
+
+  # - name: Helm Upgrade
+   #   env:
+   #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
+   #   run: |
+   #     helm repo add my-repo https://my-repo-url/
+   #     helm repo update
+   #     helm upgrade --install my-release ./charts/my-chart-0.1.0.tgz --namespace default --create-namespace
+
+   # - name: Cleanup Helm Packages
+   #   run: rm -rf ./charts        
