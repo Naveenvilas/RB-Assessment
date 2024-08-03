@@ -14,8 +14,30 @@ jobs:
     - name: Setup Helm
       uses: azure/setup-helm@v1
 
+    - name: Cache Helm dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/helm
+        key: ${{ runner.os }}-helm-dependencies
+        restore-keys: |
+          ${{ runner.os }}-helm-dependencies
+
     - name: Helm Lint
       run: helm lint ./RBCharts
 
     - name: Helm Template
       run: helm template ./RBCharts --values ./RBCharts/values.yaml
+    
+  #  - name: Helm Package
+  #    run: helm package ./RBCharts --destination ./charts
+
+   # - name: Helm Upgrade
+   #   env:
+   #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
+   #   run: |
+   #     helm repo add my-repo https://my-repo-url/
+   #     helm repo update
+   #     helm upgrade --install my-release ./charts/my-chart-0.1.0.tgz --namespace default --create-namespace
+
+   # - name: Cleanup Helm Packages
+   #   run: rm -rf ./charts
