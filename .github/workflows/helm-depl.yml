@@ -18,7 +18,7 @@ jobs:
       run: helm lint ./RBCharts
 
     - name: Helm Template
-      run: helm template ./RBCharts --values ./RBCharts\values.yaml
+      run: helm template ./RBCharts --values ./RBCharts/values.yaml
 
     - name: Install kubeval
       run: |
@@ -27,7 +27,7 @@ jobs:
         sudo mv kubeval /usr/local/bin/kubeval
 
     - name: Kubeval Validation
-      run: helm template ./RBCharts --values ./RBCharts\values.yaml | kubeval
+      run: helm template ./RBCharts --values ./RBCharts/values.yaml | kubeval
 
     - name: Install helm-unittest
       run: helm plugin install https://github.com/quintush/helm-unittest
